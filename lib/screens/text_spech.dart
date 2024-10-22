@@ -20,19 +20,39 @@ class _TextToSpeechScreenState extends State<TextToSpeechScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Text to Speech')),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextField(
-            controller: _controller,
-            decoration: const InputDecoration(labelText: 'Ingrese texto'),
-          ),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: _speak,
-            child: const Text('Reproducir Texto'),
-          ),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: TextField(
+                controller: _controller,
+                decoration: const InputDecoration(
+                  labelText: 'Ingrese texto',
+                  border: OutlineInputBorder(),
+                ),
+                maxLines: 3, // Allow multi-line input
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _speak,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green, // Button color
+                foregroundColor: Colors.white, // Text color
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15), // Button padding
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30), // Rounded corners
+                ),
+              ),
+              child: const Text(
+                'Reproducir Texto',
+                style: TextStyle(fontSize: 18), // Button text style
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart'; 
+import 'screens/home_screen.dart';
 import 'screens/geolocator_screen.dart';
 import 'screens/codigoqr_screen.dart';
 import 'screens/flash_sensor_screen.dart';
@@ -35,8 +35,7 @@ class MyApp extends StatelessWidget {
         textTheme: const TextTheme(
           bodyLarge: TextStyle(color: Colors.black),
           bodyMedium: TextStyle(color: Colors.black),
-),
-
+        ),
       ),
       initialRoute: '/home',
       routes: {
@@ -63,7 +62,7 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = [
-    const HomeScreen(), 
+    const HomeScreen(),
     const GeoLocatorScreen(),
     const QRScannerScreen(),
     const SensorScreen(),
@@ -101,7 +100,8 @@ class _MainScreenState extends State<MainScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.home, color: Colors.black),
-              title: const Text('HomeScreen', style: TextStyle(color: Colors.black)),
+              title: const Text('HomeScreen',
+                  style: TextStyle(color: Colors.black)),
               onTap: () {
                 Navigator.pop(context);
                 setState(() {
@@ -111,7 +111,8 @@ class _MainScreenState extends State<MainScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.location_on, color: Colors.black),
-              title: const Text('Geolocator', style: TextStyle(color: Colors.black)),
+              title: const Text('Geolocator',
+                  style: TextStyle(color: Colors.black)),
               onTap: () {
                 Navigator.pop(context);
                 setState(() {
@@ -121,28 +122,32 @@ class _MainScreenState extends State<MainScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.qr_code, color: Colors.black),
-              title: const Text('QR Scanner', style: TextStyle(color: Colors.black)),
+              title: const Text('QR Scanner',
+                  style: TextStyle(color: Colors.black)),
               onTap: () {
                 Navigator.pushNamed(context, '/qrscanner');
               },
             ),
             ListTile(
               leading: const Icon(Icons.flash_on, color: Colors.black),
-              title: const Text('Light Sensor', style: TextStyle(color: Colors.black)),
+              title: const Text('Light Sensor',
+                  style: TextStyle(color: Colors.black)),
               onTap: () {
                 Navigator.pushNamed(context, '/flash_sensor');
               },
             ),
             ListTile(
               leading: const Icon(Icons.speaker_notes, color: Colors.black),
-              title: const Text('Text to Speech', style: TextStyle(color: Colors.black)),
+              title: const Text('Text to Speech',
+                  style: TextStyle(color: Colors.black)),
               onTap: () {
                 Navigator.pushNamed(context, '/text_speech');
               },
             ),
             ListTile(
               leading: const Icon(Icons.mic, color: Colors.black),
-              title: const Text('Speech to Text', style: TextStyle(color: Colors.black)),
+              title: const Text('Speech to Text',
+                  style: TextStyle(color: Colors.black)),
               onTap: () {
                 Navigator.pushNamed(context, '/text_to_text');
               },
@@ -179,8 +184,13 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.black, 
+        selectedItemColor: Colors.cyan, // Change selected item color
+        unselectedItemColor: Colors.black,
+        backgroundColor: Colors.white, // Change background color
+        selectedLabelStyle: const TextStyle(
+            fontWeight: FontWeight.bold), // Change selected label style
+        unselectedLabelStyle:
+            const TextStyle(fontSize: 12), // Change unselected label style
         onTap: _onItemTapped,
       ),
     );

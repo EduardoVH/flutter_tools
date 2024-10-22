@@ -67,16 +67,40 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 30),
             ElevatedButton(
               onPressed: _launchGitHubUrl,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.cyan, // Change background color
+                foregroundColor: Colors.white, // Change text color
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Adjust padding
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30), // Rounded corners
+                ),
+              ),
               child: const Text('Visit GitHub'),
             ),
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: _makePhoneCall,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green, // Change background color
+                foregroundColor: Colors.white, // Change text color
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Adjust padding
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30), // Rounded corners
+                ),
+              ),
               child: const Text('Call Phone Number'),
             ),
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: _sendMessage,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blueAccent, // Change background color
+                foregroundColor: Colors.white, // Change text color
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Adjust padding
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30), // Rounded corners
+                ),
+              ),
               child: const Text('Send Message'),
             ),
           ],

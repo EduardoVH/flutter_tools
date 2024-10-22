@@ -35,7 +35,7 @@ class _GeoLocatorScreenState extends State<GeoLocatorScreen> {
       return;
     }
 
-    // Extraer las coordenadas del mensaje de ubicación
+    // Extract coordinates from the location message
     final parts = _locationMessage.split(", ");
     if (parts.length < 2) {
       setState(() {
@@ -44,10 +44,10 @@ class _GeoLocatorScreenState extends State<GeoLocatorScreen> {
       return;
     }
 
-    final String latitude = parts[0].split(": ")[1]; // Obtener la latitud
-    final String longitude = parts[1].split(": ")[1]; // Obtener la longitud
+    final String latitude = parts[0].split(": ")[1]; // Get latitude
+    final String longitude = parts[1].split(": ")[1]; // Get longitude
 
-    // Construir la URL de OpenStreetMap
+    // Construct OpenStreetMap URL
     final String openStreetMapUrl =
         "https://www.openstreetmap.org/?mlat=$latitude&mlon=$longitude#map=16/$latitude/$longitude";
     final Uri uri = Uri.parse(openStreetMapUrl);
@@ -73,13 +73,33 @@ class _GeoLocatorScreenState extends State<GeoLocatorScreen> {
           children: [
             ElevatedButton(
               onPressed: _getCurrentLocation,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue, // Button background color
+                foregroundColor: Colors.white, // Button text color
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Button padding
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30), // Rounded corners
+                ),
+              ),
               child: const Text("Obtener Coordenadas GPS"),
             ),
             const SizedBox(height: 10),
-            Text(_locationMessage),
+            Text(
+              _locationMessage,
+              textAlign: TextAlign.center, // Center the text
+              style: const TextStyle(fontSize: 16), // Text style
+            ),
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: _openInMaps,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green, // Button background color
+                foregroundColor: Colors.white, // Button text color
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Button padding
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30), // Rounded corners
+                ),
+              ),
               child: const Text("Ver en OpenStreetMap"),
             ),
           ],

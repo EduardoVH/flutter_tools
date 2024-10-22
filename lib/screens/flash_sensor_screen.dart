@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
-import 'package:torch_flashlight/torch_flashlight.dart';  // Asegúrate de que la librería esté correctamente instalada.
+import 'package:torch_flashlight/torch_flashlight.dart'; // Ensure the library is correctly installed.
 
 class SensorScreen extends StatefulWidget {
   const SensorScreen({super.key});
@@ -13,7 +13,7 @@ class _SensorScreenState extends State<SensorScreen> {
   bool _isFlashOn = false;
   bool _isTorchAvailable = false;
 
-  // Variables para almacenar los datos de los sensores
+  // Variables to store sensor data
   List<double>? _accelerometerValues;
   List<double>? _gyroscopeValues;
   List<double>? _magnetometerValues;
@@ -21,11 +21,11 @@ class _SensorScreenState extends State<SensorScreen> {
   @override
   void initState() {
     super.initState();
-    _checkTorchAvailability();  // Verificar si la linterna está disponible en el dispositivo
+    _checkTorchAvailability(); // Check if the flashlight is available
     _listenToSensors();
   }
 
-  // Verificar si la linterna está disponible en el dispositivo
+  // Check if the flashlight is available on the device
   Future<void> _checkTorchAvailability() async {
     bool isAvailable = await TorchFlashlight.isTorchFlashlightAvailable();
     setState(() {
@@ -34,21 +34,21 @@ class _SensorScreenState extends State<SensorScreen> {
   }
 
   void _listenToSensors() {
-    // Escuchar eventos del acelerómetro
+    // Listen to accelerometer events
     accelerometerEvents.listen((AccelerometerEvent event) {
       setState(() {
         _accelerometerValues = <double>[event.x, event.y, event.z];
       });
     });
 
-    // Escuchar eventos del giroscopio
+    // Listen to gyroscope events
     gyroscopeEvents.listen((GyroscopeEvent event) {
       setState(() {
         _gyroscopeValues = <double>[event.x, event.y, event.z];
       });
     });
 
-    // Escuchar eventos del magnetómetro
+    // Listen to magnetometer events
     magnetometerEvents.listen((MagnetometerEvent event) {
       setState(() {
         _magnetometerValues = <double>[event.x, event.y, event.z];
@@ -56,31 +56,31 @@ class _SensorScreenState extends State<SensorScreen> {
     });
   }
 
-  // Encender o apagar la linterna
+  // Toggle flashlight on/off
   Future<void> _toggleFlash() async {
     if (!_isTorchAvailable) {
-      print("Linterna no disponible en este dispositivo.");
+      print("Flashlight not available on this device.");
       return;
     }
 
     try {
       if (_isFlashOn) {
-        await TorchFlashlight.disableTorchFlashlight();  // Método correcto para apagar la linterna.
+        await TorchFlashlight.disableTorchFlashlight(); // Method to turn off the flashlight
       } else {
-        await TorchFlashlight.enableTorchFlashlight();   // Método correcto para encender la linterna.
+        await TorchFlashlight.enableTorchFlashlight(); // Method to turn on the flashlight
       }
       setState(() {
         _isFlashOn = !_isFlashOn;
       });
     } catch (e) {
-      print("Error al controlar la linterna: $e");
+      print("Error controlling the flashlight: $e");
     }
   }
 
-  // Mostrar los valores de los sensores en la pantalla
+  // Display sensor values on the screen
   Widget _buildSensorData(String sensorName, List<double>? values) {
     return Text(
-      '$sensorName: ${values?.map((v) => v.toStringAsFixed(2)).toList() ?? 'Esperando...'}',
+      '$sensorName: ${values?.map((v) => v.toStringAsFixed(2)).toList() ?? 'Waiting...'}',
       style: const TextStyle(fontSize: 16),
     );
   }
@@ -88,21 +88,29 @@ class _SensorScreenState extends State<SensorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Sensores y Linterna')),
+      appBar: AppBar(title: const Text('Sensors and Flashlight')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
               onPressed: _toggleFlash,
-              child: Text(_isFlashOn ? 'Apagar Linterna' : 'Encender Linterna'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: _isFlashOn ? Colors.red : Colors.green, // Change color based on state
+                foregroundColor: Colors.white, // Change text color
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Adjust padding
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30), // Rounded corners
+                ),
+              ),
+              child: Text(_isFlashOn ? 'Turn Off Flashlight' : 'Turn On Flashlight'),
             ),
             const SizedBox(height: 20),
-            _buildSensorData('Acelerómetro', _accelerometerValues),
+            _buildSensorData('Accelerometer', _accelerometerValues),
             const SizedBox(height: 10),
-            _buildSensorData('Giroscopio', _gyroscopeValues),
+            _buildSensorData('Gyroscope', _gyroscopeValues),
             const SizedBox(height: 10),
-            _buildSensorData('Magnetómetro', _magnetometerValues),
+            _buildSensorData('Magnetometer', _magnetometerValues),
           ],
         ),
       ),

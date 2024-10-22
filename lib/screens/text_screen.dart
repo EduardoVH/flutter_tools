@@ -38,16 +38,43 @@ class _SpeechToTextScreenState extends State<SpeechToTextScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Speech to Text')),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(_text),
-          const SizedBox(height: 20),
-          FloatingActionButton(
-            onPressed: _isListening ? _stopListening : _startListening,
-            child: Icon(_isListening ? Icons.mic : Icons.mic_none),
-          ),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                _text,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 20, color: Colors.black),
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _isListening ? _stopListening : _startListening,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: _isListening ? Colors.red : Colors.blue, // Change color based on listening state
+                foregroundColor: Colors.white, // Button text color
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15), // Button padding
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30), // Rounded corners
+                ),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(_isListening ? Icons.stop : Icons.mic, size: 30), // Change icon based on listening state
+                  const SizedBox(width: 10), // Space between icon and text
+                  Text(
+                    _isListening ? 'Detener' : 'Escuchar',
+                    style: const TextStyle(fontSize: 18), // Button text style
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
